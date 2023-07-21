@@ -1,0 +1,20 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h1>Create Post</h1>
+        {% if message %}
+<h1>{{ message }}</h1>
+{% endif %}
+        <div id="feed"></div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+        <h1>User is not logged in</h1>
+    {% endif %}
+{% endblock %}

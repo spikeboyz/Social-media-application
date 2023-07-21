@@ -1,0 +1,19 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h1>Edit Post</h1>
+        <div id="feed">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    {% else %}
+        <h1>User is not logged in</h1>
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,20 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+<script src="{% static 'network/other.js' %}"></script>
+    <h1>
+        {{ user.username }}
+    </h1>
+    <div id="user-details" data-user-id="{{ user.id }}" data-username="{{ user.username }}"></div>
+    <div id="feed">
+
+    </div>
+{% else %}
+<h1>
+    User not is not logged in 
+</h1>
+{% endif %}
+{% endblock %}

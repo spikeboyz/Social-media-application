@@ -1,0 +1,20 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+<script src="{% static 'network/Following.js' %}"></script>
+    <h1>
+        Following
+    </h1>
+    <div id="feed">
+
+    </div>
+{% else %}
+<h1>
+    User not is not logged in 
+</h1>
+{% endif %}
+{% endblock %}

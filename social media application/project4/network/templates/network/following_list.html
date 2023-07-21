@@ -1,0 +1,17 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h1>Following</h1>
+        <ul>
+            {% for users_queryset in following %}
+                {% for user in users_queryset %}
+                    <li>{{ user }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>User is not logged in</h1>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <script src="{% static 'network/user.js' %}"></script>
+        <h1>Profile</h1>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'following_list' %}">Following</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'followers_list' %}">Followers</a>
+        </li>
+        <div id="feed">
+            {% for post in posts %}
+                <div class="post">
+                    <h3>{{ post.name }}</h3>
+                    <p>Likes: {{ post.likes }}</p>
+                    <img src="{{ post.picture_link.url }}" alt="Post Image", style="width: 200px; height: auto;">
+                    <p>Timestamp: {{ post.timestamp }}</p>
+                    <a class="nav-link" href="{% url 'edit' post_id=post.pk%}">Edit Post </a>
+                    <button class="delete" data-post-id="{{ post.id }}">delete</button>
+                    <hr>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>User is not logged in</h1>
+    {% endif %}
+{% endblock %}

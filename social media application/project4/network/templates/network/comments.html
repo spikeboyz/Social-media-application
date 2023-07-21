@@ -1,0 +1,36 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <script src="{% static 'network/comments.js' %}"></script>
+        <h1>Comments</h1>
+        <h2>Add a Comment</h2>
+        <form id="commentForm" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+        <div id="feed">
+            {% for comment in comments %}
+                {% if request.user.id == comment.owner.id %}
+                <div class="comment">
+                    <p>Username: {{ comment.owner.username }}</p>
+                    <p>Comment: {{ comment.comment }}</p>
+                    <button class="delete" data-comment-id="{{ comment.id }}">delete</button>
+                    <hr>
+                </div>
+            {% else %}
+            <div class="comment">
+                <p>Username: {{ comment.owner.username }}</p>
+                <p>Comment: {{ comment.comment }}</p>
+                <hr>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>User is not logged in</h1>
+    {% endif %}
+{% endblock %}
+
